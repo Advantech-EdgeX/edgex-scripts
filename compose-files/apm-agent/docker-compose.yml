@@ -1,0 +1,17 @@
+version: '3'
+services:
+  edgex_rmm_cn:
+    image: advantech1234/edgex_rmm_cn:1.0.0.0-apm
+    container_name: edgex_rmm_cn
+    hostname: edgex_rmm_cn
+    networks:
+      - edgex-network
+
+#################################################################
+# Tooling
+#################################################################
+
+networks:
+  edgex-network:
+    driver: "bridge"
+...
