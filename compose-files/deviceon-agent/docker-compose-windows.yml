@@ -1,11 +1,17 @@
 version: '3'
 services:
   edgex_rmm_cn:
-    image: advantech1234/edgex_rmm_cn:1.0.0.0
+    image: advantech1234/edgex_rmm_cn:1.2.0.0
     container_name: edgex_rmm_cn
     hostname: edgex_rmm_cn
     networks:
       - edgex-network
+    environment:
+      - EXPORT_SERVER_IP=10.0.75.1
+      - EXPORT_SERVER_PORT=1883
+      - EXPORT_MONGO_IP=10.0.75.1
+      - EXPORT_EDGEX_IP=10.0.75.1
+      - EXPORT_AUTO_REPORT_TIME=5
 
 #################################################################
 # Tooling
