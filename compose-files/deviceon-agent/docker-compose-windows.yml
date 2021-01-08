@@ -1,7 +1,7 @@
 version: '3'
 services:
   edgex_rmm_cn:
-    image: advantech1234/edgex_rmm_cn:1.2.0.0
+    image: advantech1234/edgex_rmm_cn:1.3.0.0
     container_name: edgex_rmm_cn
     hostname: edgex_rmm_cn
     networks:
