@@ -320,6 +320,23 @@ services:
         - data
         - command
 
+  mqtt-export-service:
+    image: advantech1234/docker-app-functions-mqtt:1.0.0
+    ports:
+      - "48097:48097"
+    container_name: mqtt-export-service
+    hostname: mqtt-export-service
+    networks:
+      - edgex-network
+    volumes:
+      - db-data:/data/db
+      - log-data:/edgex/logs
+      - consul-config:/consul/config
+      - consul-data:/consul/data
+    depends_on:
+      - data
+      - command
+
   # export-client:
   #   image: edgexfoundry/docker-export-client-go:1.1.0
   #   ports:
@@ -401,24 +418,24 @@ services:
     depends_on:
       - data
       - command
-  #
-  # device-mqtt:
-  #   image: edgexfoundry/docker-device-mqtt-go:1.1.1
-  #   ports:
-  #     - "49982:49982"
-  #   container_name: edgex-device-mqtt
-  #   hostname: edgex-device-mqtt
-  #   networks:
-  #     - edgex-network
-  #   volumes:
-  #     - db-data:/data/db
-  #     - log-data:/edgex/logs
-  #     - consul-config:/consul/config
-  #     - consul-data:/consul/data
-  #   depends_on:
-  #     - data
-  #     - command
-  #
+
+  device-mqtt:
+    image: advantech1234/docker-device-mqtt-go:1.1.1
+    ports:
+      - "49982:49982"
+    container_name: edgex-device-mqtt
+    hostname: edgex-device-mqtt
+    networks:
+      - edgex-network
+    volumes:
+      - db-data:/data/db
+      - log-data:/edgex/logs
+      - consul-config:/consul/config
+      - consul-data:/consul/data
+    depends_on:
+      - data
+      - command
+
   # device-modbus:
   #   image: edgexfoundry/docker-device-modbus-go:1.1.1
   #   ports:
@@ -472,6 +489,33 @@ services:
     depends_on:
       - data
       - command
+
+#################################################################
+# EdgeX Wrapper for AI
+#################################################################
+  mqtt-broker:
+    image: eclipse-mosquitto:1.5.4
+    ports:
+      - "1883:1883"
+    container_name: edgex-mqtt-broker
+    hostname: edgex-mqtt-broker
+    networks:
+      - edgex-network
+    volumes:
+      - db-data:/data/db
+      - log-data:/edgex/logs
+      - consul-config:/consul/config
+      - consul-data:/consul/data
+
+  edgex-wrapper:
+    image: advantech1234/edgex-wrapper:1.0.0
+    container_name: edgex-wrapper
+    hostname: edgex-wrapper
+    networks:
+      - edgex-network
+    depends_on:
+      - mqtt-broker
+    restart: on-failure
 
 #################################################################
 # Tooling
