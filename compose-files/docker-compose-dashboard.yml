@@ -1,0 +1,36 @@
+version: '3'
+volumes:
+  influxdb-data:
+  grafana-data:
+
+services:
+  influxdb:
+    image: influxdb:1.7
+    ports:
+      - 8086:8086
+    container_name: edgex-influxdb
+    hostname: edgex-influxdb
+    networks:
+      - edgex-network
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB=edgex_export
+      - INFLUXDB_USER=admin
+      - INFLUXDB_USER_PASSWORD=admin
+
+  grafana:
+    image: grafana/grafana:6.7.6
+    ports:
+      - 3000:3000
+    container_name: edgex-grafana
+    hostname: edgex-grafana
+    networks:
+      - edgex-network
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+networks:
+  edgex-network:
+    driver: "bridge"
+...
