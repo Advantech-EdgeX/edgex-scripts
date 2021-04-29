@@ -323,7 +323,7 @@ services:
   mqtt-export-service:
     image: advantech1234/docker-app-functions-mqtt:1.0.0
     ports:
-      - "48097:48097"
+      - "48098:48098"
     container_name: mqtt-export-service
     hostname: mqtt-export-service
     networks:
