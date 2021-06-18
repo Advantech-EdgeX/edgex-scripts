@@ -337,6 +337,23 @@ services:
       - data
       - command
 
+  influx-export-service:
+    image: advantech1234/docker-app-functions-influx:1.0.0
+    ports:
+      - "48099:48099"
+    container_name: influx-export-service
+    hostname: influx-export-service
+    networks:
+      - edgex-network
+    volumes:
+      - db-data:/data/db
+      - log-data:/edgex/logs
+      - consul-config:/consul/config
+      - consul-data:/consul/data
+    depends_on:
+      - data
+      - command
+
   # export-client:
   #   image: edgexfoundry/docker-export-client-go:1.1.0
   #   ports:
