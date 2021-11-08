@@ -1,0 +1,38 @@
+name: "Device.MQTT.AnalyticWrapper"
+manufacturer: "Advantech"
+model: "Analytics-Device"
+description: "Analytics Device Profile"
+labels:
+  - "mqtt"
+  - "test"
+deviceResources:
+  -
+    name: analyticsdata
+    description: "device analytics data"
+    properties:
+      value:
+        { type: "String", size: "0", readWrite: "R", defaultValue: "'{'test':'test'}'"}
+      units:
+        { type: "String", readWrite: "R", defaultValue: "" }
+
+
+deviceCommands:
+  -
+    name: testanalyticsdata
+    get:
+    - { index: "1", operation: "get", object: "analyticsdata", parameter: "analyticsdata" }
+
+coreCommands:
+  -
+    name: testanalyticsdata
+    get:
+      path: "/api/v1/device/{deviceId}/testanalyticsdata"
+      responses:
+      -
+        code: "200"
+        description: "get analytics data"
+        expectedValues: ["analyticsdata"]
+      -
+        code: "503"
+        description: "service unavailable"
+        expectedValues: []

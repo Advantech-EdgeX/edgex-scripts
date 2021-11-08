@@ -437,7 +437,7 @@ services:
       - command
 
   device-mqtt:
-    image: advantech1234/docker-device-mqtt-go:1.1.1
+    image: edgexfoundry/docker-device-mqtt-go:1.1.1
     ports:
       - "49982:49982"
     container_name: edgex-device-mqtt
@@ -449,9 +449,13 @@ services:
       - log-data:/edgex/logs
       - consul-config:/consul/config
       - consul-data:/consul/data
+      - ./mqtt-profile:/custom-config
     depends_on:
       - data
       - command
+    entrypoint:
+      - /device-mqtt
+      - --confdir=/custom-config
 
   # device-modbus:
   #   image: edgexfoundry/docker-device-modbus-go:1.1.1
