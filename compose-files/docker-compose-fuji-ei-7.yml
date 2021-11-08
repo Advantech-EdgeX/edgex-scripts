@@ -320,12 +320,12 @@ services:
         - data
         - command
 
-  mqtt-export-service:
-    image: advantech1234/docker-app-functions-mqtt:1.0.0
+  wise-export-service:
+    image: advantech1234/docker-app-functions-wise:1.0.0
     ports:
       - "48098:48098"
-    container_name: mqtt-export-service
-    hostname: mqtt-export-service
+    container_name: wise-export-service
+    hostname: wise-export-service
     networks:
       - edgex-network
     volumes:
