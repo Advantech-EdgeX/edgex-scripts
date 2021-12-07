@@ -263,7 +263,7 @@ services:
       - consul-data:/consul/data
 
   ui:
-    image: advantech1234/edgex-ui-go:1.0.4.2
+    image: advantech1234/edgex-ui-go:1.0.4.3
     ports:
       - "4000:4000"
     container_name: edgex-ui-go
