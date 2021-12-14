@@ -93,7 +93,7 @@ services:
       - volume
 
   logging:
-    image: edgexfoundry/docker-support-logging-go:0.7.1
+    image: advantech1234/docker-support-logging-go:0.7.5
     ports:
       - "48061:48061"
     container_name: edgex-support-logging
@@ -127,7 +127,7 @@ services:
       - logging
 
   metadata:
-    image: edgexfoundry/docker-core-metadata-go:0.7.1
+    image: advantech1234/docker-core-metadata-go:0.7.5
     ports:
       - "48081:48081"
     container_name: edgex-core-metadata
@@ -143,7 +143,7 @@ services:
       - logging
 
   data:
-    image: edgexfoundry/docker-core-data-go:0.7.1
+    image: advantech1234/docker-core-data-go:0.7.5
     ports:
       - "48080:48080"
       - "5563:5563"
@@ -160,7 +160,7 @@ services:
       - logging
 
   command:
-    image: edgexfoundry/docker-core-command-go:0.7.1
+    image: advantech1234/docker-core-command-go:0.7.5
     ports:
       - "48082:48082"
     container_name: edgex-core-command
@@ -192,7 +192,7 @@ services:
   #     - metadata
 
   export-client:
-    image: advantech1234/docker-export-client-go:0.7.4
+    image: advantech1234/docker-export-client-go:0.7.5
     ports:
       - "48071:48071"
     container_name: edgex-export-client
@@ -212,7 +212,7 @@ services:
       - EXPORT_CLIENT_CONSUL_HOST=edgex-config-seed
 
   export-distro:
-    image: advantech1234/docker-export-distro-go:0.7.4
+    image: advantech1234/docker-export-distro-go:0.7.5
     ports:
       - "48070:48070"
       - "5566:5566"
